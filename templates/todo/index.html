@@ -1,0 +1,59 @@
+{% extends 'todo/base.html' %}
+     {% load static %}
+     {% load crispy_forms_tags %}
+{% block content %}
+<section class="vh-100" style="background-color: white;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <div class="card-body p-4">
+  
+              <p class="mb-2"><span class="h2 me-2">Todo List</span> <span
+                  class="badge bg-danger">to do or not to do?</span></p>
+              
+              <form method = "POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="modal-title py-7 w-300 mx-0 mb-3 ">
+                  
+                  {{ form |crispy }} </div>
+                  <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2" > Add Task</button>
+                </div>
+                <div class="card-body p-4">
+                  {% for task in listview %}
+
+                 
+
+                <ul class="list-group rounded-0">
+                    <li class="list-group-item border-0 d-flex align-items-center ps-0"> </li>
+                    
+
+                    <div class="btn-group">
+                      <button class="btn w-150  btn-primary active"><span class="spinner-grow spinner-grow-sm"></span>{{task.date|timesince}}</button>
+                    <button type="button" class="btn w-100 btn-secondary" active>
+                      {{task.task}}
+                     </button>
+                    <button onclick="window.location.href='{{task.id}}/delete/';" class="btn w-200  btn-primary active">Accomplished</button> 
+                    </div>
+                        
+
+
+                        
+                    </ul>
+                    <div>
+
+                    {% endfor %}
+                    </form>
+
+
+              
+  
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock content %}
